@@ -1,0 +1,269 @@
+/* MateChain — ciemny industrial dashboard */
+
+:root {
+    --tlo-glowne:      #0a0e14;
+    --tlo-panelu:      #131720;
+    --tlo-elementu:    #1c2230;
+    --tlo-hover:       #252b3a;
+    --linia:           #2a3142;
+    --tekst-glowny:    #d8dee9;
+    --tekst-przyciemniony: #7a8599;
+    --akcent-neon:     #00ff9f;
+    --akcent-alarm:    #ff3860;
+    --akcent-info:     #38b6ff;
+    --akcent-zolty:    #ffcc00;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--tlo-glowne);
+    color: var(--tekst-glowny);
+    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* === NAGŁÓWEK === */
+.naglowek {
+    background: var(--tlo-panelu);
+    border-bottom: 1px solid var(--linia);
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-tekst {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--akcent-neon);
+    letter-spacing: 1px;
+}
+
+.logo-sufix {
+    color: var(--tekst-przyciemniony);
+    margin-left: 12px;
+    font-size: 12px;
+}
+
+.status-systemu {
+    display: flex;
+    gap: 32px;
+}
+
+.status-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.status-label {
+    font-size: 10px;
+    color: var(--tekst-przyciemniony);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-wartosc {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--akcent-info);
+}
+
+/* === GŁÓWNA SEKCJA === */
+.kontener {
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+    width: 100%;
+}
+
+.panel-sekcja {
+    background: var(--tlo-panelu);
+    border: 1px solid var(--linia);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.naglowek-sekcji {
+    font-size: 12px;
+    color: var(--tekst-przyciemniony);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--linia);
+}
+
+/* === KAFELKI MASZYN === */
+.grid-maszyn {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.kafelek-maszyny {
+    background: var(--tlo-elementu);
+    border: 1px solid var(--linia);
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: background 0.2s;
+}
+
+.kafelek-maszyny:hover {
+    background: var(--tlo-hover);
+}
+
+.led {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.led.ok {
+    background: var(--akcent-neon);
+    box-shadow: 0 0 12px var(--akcent-neon);
+}
+
+.led.alarm {
+    background: var(--akcent-alarm);
+    box-shadow: 0 0 12px var(--akcent-alarm);
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+}
+
+.maszyna-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.maszyna-id {
+    font-size: 11px;
+    color: var(--tekst-przyciemniony);
+}
+
+.maszyna-temp {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--tekst-glowny);
+}
+
+.maszyna-temp.alarm {
+    color: var(--akcent-alarm);
+}
+
+/* === WYKRES === */
+.wykres-wrapper {
+    height: 280px;
+    position: relative;
+}
+
+/* === LISTY ZDARZEŃ === */
+.dwie-kolumny {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 900px) {
+    .dwie-kolumny {
+        grid-template-columns: 1fr;
+    }
+}
+
+.lista-zdarzen {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.zdarzenie {
+    background: var(--tlo-elementu);
+    border-left: 3px solid var(--linia);
+    padding: 10px 12px;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.zdarzenie.alarm {
+    border-left-color: var(--akcent-alarm);
+}
+
+.zdarzenie.paczka {
+    border-left-color: var(--akcent-zolty);
+}
+
+.zdarzenie-naglowek {
+    display: flex;
+    justify-content: space-between;
+    color: var(--tekst-glowny);
+}
+
+.zdarzenie-sygnatura, .zdarzenie-cid {
+    color: var(--akcent-info);
+    font-size: 11px;
+    word-break: break-all;
+    text-decoration: none;
+}
+
+.zdarzenie-sygnatura:hover, .zdarzenie-cid:hover {
+    color: var(--akcent-neon);
+}
+
+.zdarzenie-czas {
+    color: var(--tekst-przyciemniony);
+    font-size: 10px;
+}
+
+.info-pusta {
+    color: var(--tekst-przyciemniony);
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+}
+
+/* === STOPKA === */
+.stopka {
+    background: var(--tlo-panelu);
+    border-top: 1px solid var(--linia);
+    padding: 12px 24px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    color: var(--tekst-przyciemniony);
+    font-size: 11px;
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--tlo-glowne);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--linia);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--tekst-przyciemniony);
+}

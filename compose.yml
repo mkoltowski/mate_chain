@@ -1,0 +1,50 @@
+services:
+
+  wtryskarka_1:
+    build:
+      context: ./symulator
+      dockerfile: Containerfile
+    environment:
+      RUST_HOST: "host.docker.internal"
+      RUST_PORT: "65432"
+      SENSOR_ID: "termopara_PT100_1"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  wtryskarka_2:
+    build:
+      context: ./symulator
+      dockerfile: Containerfile
+    environment:
+      RUST_HOST: "host.docker.internal"
+      RUST_PORT: "65432"
+      SENSOR_ID: "termopara_PT100_2"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  wtryskarka_3:
+    build:
+      context: ./symulator
+      dockerfile: Containerfile
+    environment:
+      RUST_HOST: "host.docker.internal"
+      RUST_PORT: "65432"
+      SENSOR_ID: "termopara_PT100_3"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  ipfs:
+    image: docker.io/ipfs/kubo:latest
+    ports:
+      - "127.0.0.1:5001:5001"
+      - "127.0.0.1:8081:8080"
+      - "4001:4001"
+    volumes:
+      - ipfs_data:/data/ipfs
+    restart: unless-stopped
+
+volumes:
+  ipfs_data:

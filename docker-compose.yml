@@ -1,0 +1,9 @@
+services:
+  wtryskarka:
+    build:
+      context: .
+    environment:
+      RUST_HOST: "host.docker.internal"
+      RUST_PORT: "65432"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

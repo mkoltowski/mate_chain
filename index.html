@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MateChain — Panel kontroli</title>
+    <link rel="stylesheet" href="/styl.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <header class="naglowek">
+        <div class="logo">
+            <span class="logo-tekst">MateChain</span>
+        </div>
+        <div class="status-systemu">
+            <div class="status-item">
+                <span class="status-label">Maszyny aktywne</span>
+                <span class="status-wartosc" id="licznik-maszyn">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Alarmy on-chain</span>
+                <span class="status-wartosc" id="licznik-alarmow">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Paczki IPFS</span>
+                <span class="status-wartosc" id="licznik-paczek">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="kontener">
+
+        <section class="panel-sekcja">
+            <h2 class="naglowek-sekcji">Wtryskarki</h2>
+            <div id="lista-maszyn" class="grid-maszyn">
+                <div class="info-pusta">Oczekiwanie na dane...</div>
+            </div>
+        </section>
+
+        <section class="panel-sekcja">
+            <h2 class="naglowek-sekcji">Wykres temperatury (ostatnie 5 minut)</h2>
+            <div class="wykres-wrapper">
+                <canvas id="wykres-temp"></canvas>
+            </div>
+        </section>
+
+        <div class="dwie-kolumny">
+            <section class="panel-sekcja">
+                <h2 class="naglowek-sekcji">Alarmy on-chain (Solana)</h2>
+                <div id="lista-alarmow" class="lista-zdarzen">
+                    <div class="info-pusta">Brak alarmów</div>
+                </div>
+            </section>
+
+            <section class="panel-sekcja">
+                <h2 class="naglowek-sekcji">Archiwum IPFS</h2>
+                <div id="lista-paczek" class="lista-zdarzen">
+                    <div class="info-pusta">Brak paczek</div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="stopka">
+        <span>Solana localhost:8899</span>
+        <span>•</span>
+        <span>IPFS localhost:5001</span>
+        <span>•</span>
+        <span>Modbus localhost:5502</span>
+        <span>•</span>
+        <span id="zegar">--:--:--</span>
+    </footer>
+
+    <script src="/skrypt.js"></script>
+</body>
+</html>
